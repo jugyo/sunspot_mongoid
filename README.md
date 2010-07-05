@@ -20,7 +20,7 @@ Example
       field :title
 
       include Sunspot::Mongoid
-      sunspot_setup do
+      searchable do
         text :title
       end
     end

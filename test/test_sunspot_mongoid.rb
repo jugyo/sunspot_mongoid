@@ -9,7 +9,7 @@ class TestSunspotMongoid < Test::Unit::TestCase
     field :title
 
     include Sunspot::Mongoid
-    sunspot_setup do
+    searchable do
       text :title
     end
   end
@@ -19,7 +19,7 @@ class TestSunspotMongoid < Test::Unit::TestCase
     field :title
 
     include Sunspot::Mongoid
-    sunspot_setup(:auto_index => false, :auto_remove => false) do
+    searchable(:auto_index => false, :auto_remove => false) do
       text :title
     end
   end
@@ -30,9 +30,9 @@ class TestSunspotMongoid < Test::Unit::TestCase
       assert Bar.sunspot_options == {:auto_index=>false, :auto_remove=>false, :include=>[]}
     end
 
-    should 'be called Sunspot.setup when call Foo.sunspot_setup' do
+    should 'be called Sunspot.setup when call Foo.searchable' do
       mock(Sunspot).setup(Foo)
-      Foo.sunspot_setup
+      Foo.searchable
     end
 
     should 'get as text_fields from Sunspot::Setup' do

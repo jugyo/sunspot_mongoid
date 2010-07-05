@@ -15,7 +15,7 @@ module Sunspot
         extend Sunspot::Rails::Searchable::ClassMethods
         include Sunspot::Rails::Searchable::InstanceMethods
 
-        def self.sunspot_setup(options = {}, &block)
+        def self.searchable(options = {}, &block)
           Sunspot.setup(self, &block)
 
           class_inheritable_hash :sunspot_options
