@@ -1,10 +1,19 @@
+require 'sunspot'
 require 'mongoid'
-require 'sunspot/rails/searchable'
+require 'sunspot/rails'
 
-# This code is modified for mongoid from the follow,
-# http://github.com/outoftime/sunspot/blob/master/sunspot_rails/lib/sunspot/rails/searchable.rb
+# == Examples:
 #
-# Sunspot::Rails is distributed under the MIT License, copyright © 2009 Mat Brown
+# class Post
+#   include Mongoid::Document
+#   field :title
+# 
+#   include Sunspot::Mongoid
+#   searchable do
+#     text :title
+#   end
+# end
+#
 module Sunspot
   module Mongoid
     def self.included(base)
@@ -15,25 +24,29 @@ module Sunspot
         extend Sunspot::Rails::Searchable::ClassMethods
         include Sunspot::Rails::Searchable::InstanceMethods
 
-        def self.searchable(options = {}, &block)
-          Sunspot.setup(self, &block)
+        extend Sunspot::Mongoid::ClassMethods
+      end
+    end
 
-          class_inheritable_hash :sunspot_options
+    module ClassMethods
+      def searchable(options = {}, &block)
+        Sunspot.setup(self, &block)
 
-          unless options[:auto_index] == false
-            before_save :maybe_mark_for_auto_indexing
-            after_save :maybe_auto_index
-          end
+        class_inheritable_hash :sunspot_options
 
-          unless options[:auto_remove] == false
-            after_destroy do |searchable|
-              searchable.remove_from_index
-            end
-          end
-          options[:include] = Sunspot::Util::Array(options[:include])
-
-          self.sunspot_options = options
+        unless options[:auto_index] == false
+          before_save :maybe_mark_for_auto_indexing
+          after_save :maybe_auto_index
         end
+
+        unless options[:auto_remove] == false
+          after_destroy do |searchable|
+            searchable.remove_from_index
+          end
+        end
+        options[:include] = Sunspot::Util::Array(options[:include])
+
+        self.sunspot_options = options
       end
     end
 
