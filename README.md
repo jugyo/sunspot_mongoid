@@ -44,6 +44,18 @@ Example
     #=> #<Post _id: 4c319556327b3c4b42000001, title: "foo">
     #=> #<Post _id: 4c319556327b3c4b42000002, title: "foo bar">
 
+Use as Rails plugin
+----
+
+add gems to Gemfile as following,
+
+    gem 'sunspot'
+    gem 'sunspot_rails'
+
+and install sunspot_mongoid as rails plugin,
+
+    rails plugin install git://github.com/jugyo/sunspot_mongoid.git
+
 Copyright
 ----
 
