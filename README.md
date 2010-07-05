@@ -30,7 +30,7 @@ add a gem to Gemfile as following,
 
     gem 'sunspot_mongoid'
 
-config/initializers/sunspot_mongoid.rb
+create config/initializers/sunspot_mongoid.rb,
 
     Sunspot.session = Sunspot::Rails.build_session
     ActionController::Base.module_eval { include(Sunspot::Rails::RequestLifecycle) }
