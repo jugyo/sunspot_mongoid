@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "sunspot_mongoid"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{A Sunspot wrapper for Mongoid.}
+    gem.description = %Q{A Sunspot wrapper for Mongoid that is like sunspot_rails.}
     gem.email = "jugyo.org@gmail.com"
     gem.homepage = "http://github.com/jugyo/sunspot_mongoid"
     gem.authors = ["jugyo"]
