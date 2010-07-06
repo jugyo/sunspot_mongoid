@@ -18,35 +18,9 @@ module Sunspot
   module Mongoid
     def self.included(base)
       base.class_eval do
+        extend Sunspot::Rails::Searchable::ActsAsMethods
         Sunspot::Adapters::DataAccessor.register(DataAccessor, base)
         Sunspot::Adapters::InstanceAdapter.register(InstanceAdapter, base)
-
-        extend Sunspot::Rails::Searchable::ClassMethods
-        include Sunspot::Rails::Searchable::InstanceMethods
-
-        extend Sunspot::Mongoid::ClassMethods
-      end
-    end
-
-    module ClassMethods
-      def searchable(options = {}, &block)
-        Sunspot.setup(self, &block)
-
-        class_inheritable_hash :sunspot_options
-
-        unless options[:auto_index] == false
-          before_save :maybe_mark_for_auto_indexing
-          after_save :maybe_auto_index
-        end
-
-        unless options[:auto_remove] == false
-          after_destroy do |searchable|
-            searchable.remove_from_index
-          end
-        end
-        options[:include] = Sunspot::Util::Array(options[:include])
-
-        self.sunspot_options = options
       end
     end
 
