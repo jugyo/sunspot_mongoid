@@ -36,7 +36,7 @@ module Sunspot
       end
 
       def load_all(ids)
-        @clazz.criteria.in(:_id => ids)
+        @clazz.where(:_id.in => ids.map { |id| BSON::ObjectID.from_string(id) })
       end
     end
   end
