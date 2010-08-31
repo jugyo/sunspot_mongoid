@@ -32,7 +32,7 @@ module Sunspot
 
     class DataAccessor < Sunspot::Adapters::DataAccessor
       def load(id)
-        @clazz.find(id) rescue nil
+        @clazz.find(BSON::ObjectID.from_string(id)) rescue nil
       end
 
       def load_all(ids)
