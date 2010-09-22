@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
      "init.rb",
      "lib/sunspot/mongoid.rb",
      "lib/sunspot_mongoid.rb",
+     "sunspot_mongoid.gemspec",
      "test/helper.rb",
      "test/test_sunspot_mongoid.rb"
   ]
