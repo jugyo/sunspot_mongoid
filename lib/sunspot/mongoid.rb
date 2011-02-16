@@ -38,10 +38,7 @@ module Sunspot
       # The sunspot solr_index method is very dependent on ActiveRecord, so
       # we'll change it to work more efficiently with Mongoid.
       def solr_index(opt={})
-        all.each do |m|
-          Sunspot.index(m)
-        end
-        Sunspot.commit
+        Sunspot.index!(all)
       end
     end
 
