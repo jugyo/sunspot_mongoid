@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{aq1018-sunspot_mongoid}
-  s.version = "0.3.2"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["jugyo", "aq1018"]
@@ -22,12 +22,12 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "aq1018-sunspot_mongoid.gemspec",
     "examples/example.rb",
     "init.rb",
     "lib/sunspot/mongoid.rb",
     "lib/sunspot/mongoid/railtie.rb",
     "lib/sunspot_mongoid.rb",
-    "sunspot_mongoid.gemspec",
     "tasks/sunspot_mongoid.rake",
     "test/helper.rb",
     "test/test_sunspot_mongoid.rb"
