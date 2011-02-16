@@ -22,13 +22,6 @@ module Sunspot
         extend Sunspot::Mongoid::ActsAsMethods
         Sunspot::Adapters::DataAccessor.register(DataAccessor, base)
         Sunspot::Adapters::InstanceAdapter.register(InstanceAdapter, base)
-        
-        # find_in_batches is not defined in mongoid, making an alias for it
-        # since mongo-ruby-driver already does streaming
-        # find_in_batches is not really needed.
-        class << self
-          alias :find_in_batches :find
-        end
       end
     end
 
