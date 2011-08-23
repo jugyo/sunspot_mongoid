@@ -27,7 +27,7 @@ namespace :sunspot do
   # $ rake sunspot:reindex[1000,Post]     # reindex only the Post model in
   #                                       # batchs of 1000
   # $ rake sunspot:reindex[,Post+Author]  # reindex Post and Author model
-  task :reindex, :batch_size, :models, :needs => :environment do |t, args|
+  task :reindex, [:batch_size, :models] => [:environment] do |t, args|
     unless args[:models]
       all_files = Dir.glob(Rails.root.join('app', 'models', '*.rb'))
       all_models = all_files.map { |path| File.basename(path, '.rb').camelize.constantize }
