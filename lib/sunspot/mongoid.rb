@@ -45,7 +45,7 @@ module Sunspot
 
     class InstanceAdapter < Sunspot::Adapters::InstanceAdapter
       def id
-        @instance.id
+        @instance.id.to_s
       end
     end
 
