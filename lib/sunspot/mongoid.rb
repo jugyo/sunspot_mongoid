@@ -32,13 +32,18 @@ module Sunspot
 
     class DataAccessor < Sunspot::Adapters::DataAccessor
       def load(id)
-        @clazz.find(BSON::ObjectID.from_string(id)) rescue nil
+        criteria(id).first
       end
 
       def load_all(ids)
-        @clazz.where(:_id.in => ids.map { |id| BSON::ObjectId.from_string(id) })
+        criteria(ids)
       end
-      
+
+      private
+
+      def criteria(id)
+        @clazz.criteria.id(id)
+      end
     end
   end
 end
