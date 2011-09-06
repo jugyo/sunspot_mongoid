@@ -41,8 +41,9 @@ module Sunspot
 
       private
 
-      def criteria(id)
-        @clazz.criteria.id(id)
+      def criteria(ids)
+        c = @clazz.criteria
+        c.respond_to?(:for_ids) ? c.for_ids(ids) : c.id(ids)
       end
     end
   end
