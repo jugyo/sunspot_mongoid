@@ -22,6 +22,7 @@ module Sunspot
         extend Sunspot::Mongoid::ActsAsMethods
         Sunspot::Adapters::DataAccessor.register(DataAccessor, base)
         Sunspot::Adapters::InstanceAdapter.register(InstanceAdapter, base)
+	after_destroy :_remove_index
       end
     end
 
@@ -64,5 +65,7 @@ module Sunspot
         @clazz.criteria.id(id)
       end
     end
-  end
+    def _remove_index
+      Sunspot.remove! self
+    end
 end
