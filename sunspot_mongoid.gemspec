@@ -48,7 +48,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<sunspot>, [">= 1.1.0"])
       s.add_runtime_dependency(%q<sunspot_rails>, [">= 1.1.0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<rake>, [">= 0"])
       s.add_development_dependency(%q<rr>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
     else
       s.add_dependency(%q<mongoid>, [">= 0"])
       s.add_dependency(%q<sunspot>, [">= 1.1.0"])
