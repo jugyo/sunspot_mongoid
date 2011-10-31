@@ -21,6 +21,7 @@ module Sunspot
         extend Sunspot::Rails::Searchable::ActsAsMethods
         Sunspot::Adapters::DataAccessor.register(DataAccessor, base)
         Sunspot::Adapters::InstanceAdapter.register(InstanceAdapter, base)
+	after_destroy :_remove_index
       end
     end
 
@@ -40,5 +41,7 @@ module Sunspot
       end
       
     end
-  end
+    def _remove_index
+      Sunspot.remove! self
+    end
 end
