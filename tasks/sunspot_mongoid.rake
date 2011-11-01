@@ -2,17 +2,19 @@
 require 'sunspot/rails/tasks'
 
 # hack to remove 'sunspot:reindex' task and add our own
-Rake::TaskManager.class_eval do
-  def remove_task(task_name)
-    @tasks.delete(task_name.to_s)
+# see http://blog.jayfields.com/2008/02/rake-task-overwriting.html
+class Rake::Task
+  def abandon
+    @full_comment = nil
+    clear_actions
+    clear_prerequisites
   end
 end
 
-Rake.application.remove_task('sunspot:reindex')
+Rake::Task["sunspot:reindex"].abandon
 
 # override the tasks that depends on active record
 namespace :sunspot do
-  
   desc "Reindex all solr models that are located in your application's models directory. (Batch size ignored)"
   # This task depends on the standard Rails file naming \
   # conventions, in that the file name matches the defined class name. \
@@ -28,6 +30,8 @@ namespace :sunspot do
   #                                       # batchs of 1000
   # $ rake sunspot:reindex[,Post+Author]  # reindex Post and Author model
   task :reindex, [:batch_size, :models] => [:environment] do |t, args|
+    t.clear_actions
+    t.clear_prerequisites
     unless args[:models]
       all_files = Dir.glob(Rails.root.join('app', 'models', '*.rb'))
       all_models = all_files.map { |path| File.basename(path, '.rb').camelize.constantize }
