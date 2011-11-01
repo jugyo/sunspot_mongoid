@@ -22,7 +22,8 @@ module Sunspot
         extend Sunspot::Mongoid::ActsAsMethods
         Sunspot::Adapters::DataAccessor.register(DataAccessor, base)
         Sunspot::Adapters::InstanceAdapter.register(InstanceAdapter, base)
-	after_destroy :_remove_index
+        after_destroy :_remove_index
+        after_save :_update_index
       end
     end
 
@@ -67,6 +68,9 @@ module Sunspot
     end
     def _remove_index
       Sunspot.remove! self
+    end
+    def _update_index
+      Sunspot.index! self
     end
   end
 end
