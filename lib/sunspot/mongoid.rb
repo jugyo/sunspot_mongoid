@@ -63,7 +63,7 @@ module Sunspot
       private
 
       def criteria(id)
-        @clazz.criteria.id(id)
+        @clazz.criteria.find(id)
       end
     end
     def _remove_index
