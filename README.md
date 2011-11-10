@@ -41,6 +41,16 @@ and install sunspot_mongoid as rails plugin,
 
     rails plugin install git://github.com/jugyo/sunspot_mongoid.git
 
+Rake task
+----
+
+Reindex all solr models that are located in your application's models directory.
+
+    $ rake sunspot:reindex                # reindex all models
+    $ rake sunspot:reindex[,Post]         # reindex only the Post model
+    $ rake sunspot:reindex[,Post+Author]  # reindex Post and Author model
+
+
 Links
 ----
 
