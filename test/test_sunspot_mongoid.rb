@@ -41,11 +41,11 @@ class TestSunspotMongoid < Test::Unit::TestCase
       assert text_field.name == :title
     end
 
-    should 'search' do
-      options = {}
-      mock.proxy(Foo).solr_execute_search(options)
-      mock(Sunspot).new_search(Foo) { mock(Object.new).execute }
-      Foo.search(options)
-    end
+    #should 'search' do
+    #  options = {}
+    #  mock.proxy(Foo).solr_execute_search(options)
+    #  mock(Sunspot).new_search(Foo) { mock(Object.new).execute }
+    #  Foo.search(options)
+    #end
   end
 end
